@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c6wadhpdu25p3"]
+
+[ext_resource type="Texture2D" uid="uid://br0qomffj2iru" path="res://assets/textures/characters/player-body.png" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://c4bff3qak6sv1" path="res://assets/textures/characters/shadow.png" id="1_dovo2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
+radius = 2.0
+height = 6.0
+
+[node name="Player" type="CharacterBody2D" unique_id=361226972]
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=369833432]
+position = Vector2(-1, 0)
+texture = ExtResource("1_dovo2")
+
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=1872888640]
+position = Vector2(0, -8)
+texture = ExtResource("1_8afob")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1869154060]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_dovo2")
