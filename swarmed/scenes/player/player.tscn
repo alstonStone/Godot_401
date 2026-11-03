@@ -110,3 +110,8 @@ position = Vector2(0, -5)
 
 [node name="Weapon" parent="WeaponPivot" unique_id=1565522482 instance=ExtResource("4_lvxji")]
 position = Vector2(3, 0)
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1633659319]
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="shoot"]

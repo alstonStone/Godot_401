@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var body_sprite: Sprite2D = $BodySprite
+@onready var weapon: Weapon = $WeaponPivot/Weapon
 
 var speed: int = 4000
 
@@ -30,3 +31,6 @@ func aim_at(target: Vector2) -> void:
 	else:
 		weapon_pivot.scale.y = 1
 		body_sprite.flip_h = false
+
+func shoot() -> void:
+	weapon.shoot()
