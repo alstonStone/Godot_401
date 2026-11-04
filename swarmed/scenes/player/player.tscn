@@ -84,6 +84,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=361226972]
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_gmlin")
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=369833432]
@@ -110,6 +112,9 @@ position = Vector2(0, -5)
 
 [node name="Weapon" parent="WeaponPivot" unique_id=1565522482 instance=ExtResource("4_lvxji")]
 position = Vector2(3, 0)
+
+[node name="GunTip" type="Marker2D" parent="WeaponPivot" unique_id=1696527972]
+position = Vector2(12, -4)
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1633659319]
 autostart = true
