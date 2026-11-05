@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-signal shot_fired(global_position: Vector2, global_rotation: float)
+signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var weapon_pivot: Node2D = $WeaponPivot
@@ -12,6 +12,8 @@ signal shot_fired(global_position: Vector2, global_rotation: float)
 
 var speed: int = 4000
 @export var fire_rate := 2.0 #shots per second
+@export var damage_min := 3
+@export var damage_max := 5
 
 
 
@@ -43,4 +45,5 @@ func aim_at(target: Vector2) -> void:
 
 func shoot() -> void:
 	weapon.shoot()
-	shot_fired.emit(gun_tip.global_position, gun_tip.global_rotation)
+	var damage := randi_range(damage_min,damage_max)
+	shot_fired.emit(gun_tip.global_position, gun_tip.global_rotation,damage)
