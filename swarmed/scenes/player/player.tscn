@@ -119,4 +119,10 @@ position = Vector2(12, -4)
 [node name="AttackTimer" type="Timer" parent="." unique_id=1633659319]
 autostart = true
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=98600170]
+limit_left = 0
+limit_top = 0
+limit_right = 340
+limit_bottom = 270
+
 [connection signal="timeout" from="AttackTimer" to="." method="shoot"]

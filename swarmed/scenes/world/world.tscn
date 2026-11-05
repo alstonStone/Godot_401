@@ -4,6 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://r8c1mr31dunb" path="res://assets/textures/backgrounds/map-background.png" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://c6wadhpdu25p3" path="res://scenes/player/player.tscn" id="2_sl2e5"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neqkb"]
+size = Vector2(20, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7pehq"]
+size = Vector2(380, 20)
+
 [node name="World" type="Node2D" unique_id=826623239]
 script = ExtResource("1_1fp7r")
 
@@ -13,5 +19,43 @@ centered = false
 
 [node name="Player" parent="." unique_id=361226972 instance=ExtResource("2_sl2e5")]
 position = Vector2(167, 135)
+
+[node name="WorldBoundaries" type="Node2D" parent="." unique_id=1898400749]
+metadata/_edit_lock_ = true
+
+[node name="LeftBoundary" type="StaticBody2D" parent="WorldBoundaries" unique_id=523089359]
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/LeftBoundary" unique_id=1269249941]
+position = Vector2(-10, 135)
+shape = SubResource("RectangleShape2D_neqkb")
+
+[node name="RightBoundary" type="StaticBody2D" parent="WorldBoundaries" unique_id=2055603890]
+position = Vector2(360, 0)
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/RightBoundary" unique_id=1991160393]
+position = Vector2(-10, 135)
+shape = SubResource("RectangleShape2D_neqkb")
+
+[node name="TopBoundary" type="StaticBody2D" parent="WorldBoundaries" unique_id=1146555789]
+position = Vector2(0, 5)
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/TopBoundary" unique_id=1129369658]
+position = Vector2(170, -10)
+shape = SubResource("RectangleShape2D_7pehq")
+
+[node name="BottomBoundary" type="StaticBody2D" parent="WorldBoundaries" unique_id=1586092357]
+position = Vector2(0, 290)
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/BottomBoundary" unique_id=1746571031]
+position = Vector2(170, -10)
+shape = SubResource("RectangleShape2D_7pehq")
 
 [connection signal="shot_fired" from="Player" to="." method="_on_player_shot_fired"]
