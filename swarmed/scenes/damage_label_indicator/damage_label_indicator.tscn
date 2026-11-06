@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bgf8syuf76rhr"]
+
+[ext_resource type="FontFile" uid="uid://di8cfisxjfcj7" path="res://assets/fonts/my 3x5 tiny mono pixel font.ttf" id="1_adrt3"]
+
+[node name="DamageLabelIndicator" type="Node2D" unique_id=1077133104]
+
+[node name="DamageLabel" type="Label" parent="." unique_id=1476389337]
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 8.0
+theme_override_fonts/font = ExtResource("1_adrt3")
+theme_override_font_sizes/font_size = 6
+text = "10"
+horizontal_alignment = 1
