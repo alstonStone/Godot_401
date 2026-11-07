@@ -19,7 +19,7 @@ var state := State.Moving
 
 
 @export var player: Player = null
-@export var speed: float = 500.0
+@export var speed: float = 1000.0
 @export var max_health := 15
 
 

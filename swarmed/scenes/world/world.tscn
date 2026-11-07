@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dqhlkss18rwai" path="res://scenes/world/world.gd" id="1_1fp7r"]
 [ext_resource type="Texture2D" uid="uid://r8c1mr31dunb" path="res://assets/textures/backgrounds/map-background.png" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://c6wadhpdu25p3" path="res://scenes/player/player.tscn" id="2_sl2e5"]
-[ext_resource type="PackedScene" uid="uid://dl7nv6iulnkd8" path="res://scenes/enemy/enemy.tscn" id="4_6m72w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_neqkb"]
 size = Vector2(20, 270)
@@ -60,22 +59,9 @@ metadata/_edit_lock_ = true
 position = Vector2(170, -10)
 shape = SubResource("RectangleShape2D_7pehq")
 
-[node name="Enemy" parent="." unique_id=1479622231 node_paths=PackedStringArray("player") instance=ExtResource("4_6m72w")]
-position = Vector2(127, 126)
-player = NodePath("../Player")
-
-[node name="Enemy2" parent="." unique_id=522885327 node_paths=PackedStringArray("player") instance=ExtResource("4_6m72w")]
-position = Vector2(123, 127)
-player = NodePath("../Player")
-
-[node name="Enemy3" parent="." unique_id=1217262716 node_paths=PackedStringArray("player") instance=ExtResource("4_6m72w")]
-position = Vector2(110, 135)
-player = NodePath("../Player")
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1274309921]
+wait_time = 3.0
+autostart = true
 
 [connection signal="shot_fired" from="Player" to="." method="_on_player_shot_fired"]
-[connection signal="explode" from="Enemy" to="." method="_on_enemy_explode"]
-[connection signal="hit" from="Enemy" to="." method="_on_enemy_hit"]
-[connection signal="explode" from="Enemy2" to="." method="_on_enemy_explode"]
-[connection signal="hit" from="Enemy2" to="." method="_on_enemy_hit"]
-[connection signal="explode" from="Enemy3" to="." method="_on_enemy_explode"]
-[connection signal="hit" from="Enemy3" to="." method="_on_enemy_hit"]
+[connection signal="timeout" from="SpawnTimer" to="." method="spawn_enemies"]

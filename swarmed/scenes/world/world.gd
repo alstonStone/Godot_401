@@ -3,8 +3,27 @@ extends Node2D
 
 
 const BULLET := preload("res://scenes/bullet/bullet.tscn")
-const DAMAGE_LABEL_INDICATOR = preload("res://scenes/damage_label_indicator/damage_label_indicator.tscn")
-const EXPLOSION = preload("res://scenes/explosion/explosion.tscn")
+const DAMAGE_LABEL_INDICATOR := preload("res://scenes/damage_label_indicator/damage_label_indicator.tscn")
+const EXPLOSION := preload("res://scenes/explosion/explosion.tscn")
+const ENEMY := preload("res://scenes/enemy/enemy.tscn")
+
+@onready var player: Player = $Player
+
+
+func _ready() -> void:
+	spawn_enemies()
+	pass
+
+
+func spawn_enemies() -> void:
+	for i: int in 3:
+		var new_enemy := ENEMY.instantiate() as Enemy
+		new_enemy.hit.connect(_on_enemy_hit)
+		new_enemy.explode.connect(_on_enemy_explode)
+		new_enemy.player = player
+		new_enemy.global_position = player.get_random_spawn_position()
+		add_child(new_enemy)
+		
 
 
 func _on_player_shot_fired(global_position: Vector2, global_rotation: float, damage: int) -> void:
@@ -23,7 +42,7 @@ func _on_enemy_hit(global_position: Vector2, amount: int) -> void:
 
 
 func _on_enemy_explode(global_position: Vector2, amount: int) -> void:
-	var new_explosion = EXPLOSION.instantiate() as Explosion
+	var new_explosion := EXPLOSION.instantiate() as Explosion
 	new_explosion.set_splash_damage(amount)
 	new_explosion.global_position = global_position
 	#add_child(new_explosion)

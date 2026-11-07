@@ -11,9 +11,9 @@ signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
 @onready var attack_timer: Timer = $AttackTimer
 
 var speed: int = 4000
-@export var fire_rate := 2.0 #shots per second
+@export var fire_rate := 4.0 #shots per second
 @export var damage_min := 3
-@export var damage_max := 5
+@export var damage_max := 8
 
 
 
@@ -47,3 +47,9 @@ func shoot() -> void:
 	weapon.shoot()
 	var damage := randi_range(damage_min,damage_max)
 	shot_fired.emit(gun_tip.global_position, gun_tip.global_rotation,damage)
+
+
+func get_random_spawn_position() -> Vector2:
+	var random_angle := randf_range(0, TAU)
+	return position + Vector2.from_angle(random_angle) * 250
+	

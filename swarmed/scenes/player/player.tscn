@@ -117,6 +117,7 @@ position = Vector2(3, 0)
 position = Vector2(12, -4)
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1633659319]
+wait_time = 5.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=98600170]
