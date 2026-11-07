@@ -4,6 +4,7 @@ extends Node2D
 
 const BULLET := preload("res://scenes/bullet/bullet.tscn")
 const DAMAGE_LABEL_INDICATOR = preload("res://scenes/damage_label_indicator/damage_label_indicator.tscn")
+const EXPLOSION = preload("res://scenes/explosion/explosion.tscn")
 
 
 func _on_player_shot_fired(global_position: Vector2, global_rotation: float, damage: int) -> void:
@@ -19,3 +20,13 @@ func _on_enemy_hit(global_position: Vector2, amount: int) -> void:
 	add_child(new_damage_label)
 	new_damage_label.global_position = global_position
 	new_damage_label.set_damage(amount)
+
+
+func _on_enemy_explode(global_position: Vector2, amount: int) -> void:
+	var new_explosion = EXPLOSION.instantiate() as Explosion
+	new_explosion.set_splash_damage(amount)
+	new_explosion.global_position = global_position
+	#add_child(new_explosion)
+	call_deferred("add_child",new_explosion)
+	
+	
