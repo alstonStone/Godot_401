@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal hit(global_position: Vector2, amount: int)
 signal explode(global_position: Vector2, amount: int)
+signal drop_coin(global_position: Vector2, coin_type: Coin.CoinType)
 
 enum State {Moving, Hurting, Dying}
 
@@ -21,6 +22,7 @@ var state := State.Moving
 @export var player: Player = null
 @export var speed: float = 1000.0
 @export var max_health := 15
+@export var reward:Coin.CoinType = Coin.CoinType.Bronze
 
 
 
@@ -60,6 +62,7 @@ func take_damage(amount: int) -> void:
 			state = State.Dying
 			extra_damage = extra_damage/2
 			explode.emit(bullet_collision_shape_2d.global_position, extra_damage)
+			drop_coin.emit(bullet_collision_shape_2d.global_position, reward)
 			self.queue_free()
 
 

@@ -14,6 +14,7 @@ var speed: int = 4000
 @export var fire_rate := 4.0 #shots per second
 @export var damage_min := 3
 @export var damage_max := 8
+@export var coins_collected := 0
 
 
 
@@ -53,3 +54,7 @@ func get_random_spawn_position() -> Vector2:
 	var random_angle := randf_range(0, TAU)
 	return position + Vector2.from_angle(random_angle) * 250
 	
+
+func add_coin(amount: int) -> void:
+	coins_collected += amount
+	print("coins: %d" % coins_collected)

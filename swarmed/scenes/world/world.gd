@@ -6,6 +6,7 @@ const BULLET := preload("res://scenes/bullet/bullet.tscn")
 const DAMAGE_LABEL_INDICATOR := preload("res://scenes/damage_label_indicator/damage_label_indicator.tscn")
 const EXPLOSION := preload("res://scenes/explosion/explosion.tscn")
 const ENEMY := preload("res://scenes/enemy/enemy.tscn")
+const COIN = preload("res://scenes/coin/coin.tscn")
 
 @onready var player: Player = $Player
 
@@ -20,6 +21,7 @@ func spawn_enemies() -> void:
 		var new_enemy := ENEMY.instantiate() as Enemy
 		new_enemy.hit.connect(_on_enemy_hit)
 		new_enemy.explode.connect(_on_enemy_explode)
+		new_enemy.drop_coin.connect(spawn_coin)
 		new_enemy.player = player
 		new_enemy.global_position = player.get_random_spawn_position()
 		add_child(new_enemy)
@@ -48,4 +50,9 @@ func _on_enemy_explode(global_position: Vector2, amount: int) -> void:
 	#add_child(new_explosion)
 	call_deferred("add_child",new_explosion)
 	
-	
+
+func spawn_coin(global_position: Vector2, coin_type: Coin.CoinType) -> void:
+	var new_coin := COIN.instantiate() as Coin
+	new_coin.type = coin_type
+	new_coin.global_position = global_position
+	add_child(new_coin)
