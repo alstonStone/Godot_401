@@ -47,12 +47,12 @@ func _on_enemy_explode(global_position: Vector2, amount: int) -> void:
 	var new_explosion := EXPLOSION.instantiate() as Explosion
 	new_explosion.set_splash_damage(amount)
 	new_explosion.global_position = global_position
-	#add_child(new_explosion)
-	call_deferred("add_child",new_explosion)
+	call_deferred("add_child", new_explosion)
 	
 
 func spawn_coin(global_position: Vector2, coin_type: Coin.CoinType) -> void:
 	var new_coin := COIN.instantiate() as Coin
 	new_coin.type = coin_type
 	new_coin.global_position = global_position
-	add_child(new_coin)
+	#add_child.call_deferred(new_coin)      Another way of doing call deffered
+	call_deferred("add_child", new_coin)

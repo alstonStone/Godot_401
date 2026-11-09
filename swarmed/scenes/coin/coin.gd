@@ -2,13 +2,14 @@ class_name Coin
 extends Area2D
 
 enum CoinType {Bronze, Jade, Diamond, Sapphire}
-var type := CoinType.Bronze
+@export var type := CoinType.Bronze
 
 @onready var coin_sprite: Sprite2D = $CoinSprite
 
 
 func _ready() -> void:
 	coin_sprite.frame = type
+	
 
 
 

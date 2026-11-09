@@ -9,17 +9,22 @@ signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
 @onready var weapon: Weapon = $WeaponPivot/Weapon
 @onready var gun_tip: Marker2D = $WeaponPivot/GunTip
 @onready var attack_timer: Timer = $AttackTimer
+@onready var magnet_area: Area2D = $MagnetArea
+@onready var magnet_sphere: CollisionShape2D = $MagnetArea/MagnetSphere
 
-var speed: int = 4000
+@export var speed: int = 4000
 @export var fire_rate := 4.0 #shots per second
 @export var damage_min := 3
 @export var damage_max := 8
+@export var magnet_strength := 20.0
+
 @export var coins_collected := 0
 
 
 
 func _ready() -> void:
 	attack_timer.start(1 / fire_rate)
+	magnet_sphere.shape.radius = magnet_strength
 
 
 func _physics_process(delta: float) -> void:
@@ -31,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		animation_player.play("idle")
 	aim_at(get_global_mouse_position())
+	attract_coins(delta)
 
 
 func aim_at(target: Vector2) -> void:
@@ -58,3 +64,11 @@ func get_random_spawn_position() -> Vector2:
 func add_coin(amount: int) -> void:
 	coins_collected += amount
 	print("coins: %d" % coins_collected)
+
+
+func attract_coins(delta: float) -> void: 
+	for area: Area2D in magnet_area.get_overlapping_areas():
+		if area is Coin:
+			var coin: Coin = area
+			var coin_direction = coin.global_position.direction_to(global_position)
+			coin.position += coin_direction * magnet_strength * delta
