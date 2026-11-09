@@ -39,6 +39,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [2, 0, 2, 0, 2]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_hurting"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_p47bc"]
 resource_name = "idle"
@@ -84,6 +98,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_neqkb"]
+radius = 2.0
+height = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=361226972]
 collision_layer = 2
@@ -135,4 +153,14 @@ collision_mask = 16
 [node name="MagnetSphere" type="CollisionShape2D" parent="MagnetArea" unique_id=517148191]
 shape = SubResource("CircleShape2D_lvxji")
 
+[node name="HitboxArea" type="Area2D" parent="." unique_id=1416656674]
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitboxShape" type="CollisionShape2D" parent="HitboxArea" unique_id=152666251]
+position = Vector2(-1, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_neqkb")
+
 [connection signal="timeout" from="AttackTimer" to="." method="shoot"]
+[connection signal="body_entered" from="HitboxArea" to="." method="check_for_overlapping_enemies"]

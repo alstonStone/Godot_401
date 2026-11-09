@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
 
+enum State {Moving, Hurting, Dying}
+var state := State.Moving
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var body_sprite: Sprite2D = $BodySprite
@@ -11,14 +14,18 @@ signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
 @onready var attack_timer: Timer = $AttackTimer
 @onready var magnet_area: Area2D = $MagnetArea
 @onready var magnet_sphere: CollisionShape2D = $MagnetArea/MagnetSphere
+@onready var hitbox_area: Area2D = $HitboxArea
+
+@onready var current_health: int = max_health
 
 @export var speed: int = 4000
-@export var fire_rate := 4.0 #shots per second
-@export var damage_min := 3
-@export var damage_max := 8
-@export var magnet_strength := 20.0
+@export var fire_rate: float = 4.0 #shots per second
+@export var damage_min: int = 3
+@export var damage_max: int = 8
+@export var magnet_strength: float = 20.0
+@export var max_health: int = 3
 
-@export var coins_collected := 0
+@export var coins_collected: int = 0
 
 
 
@@ -28,15 +35,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_vector("move_left","move_right","move_up","move_down")
-	velocity = (direction * speed) * delta
-	move_and_slide()
-	if direction != Vector2.ZERO :
-		animation_player.play("walk")
-	else:
-		animation_player.play("idle")
-	aim_at(get_global_mouse_position())
-	attract_coins(delta)
+	if state != State.Dying:
+		var direction := Input.get_vector("move_left","move_right","move_up","move_down")
+		velocity = (direction * speed) * delta
+		move_and_slide()
+		play_moving_animation(direction)
+		aim_at(get_global_mouse_position())
+		attract_coins(delta)
 
 
 func aim_at(target: Vector2) -> void:
@@ -51,9 +56,10 @@ func aim_at(target: Vector2) -> void:
 
 
 func shoot() -> void:
-	weapon.shoot()
-	var damage := randi_range(damage_min,damage_max)
-	shot_fired.emit(gun_tip.global_position, gun_tip.global_rotation,damage)
+	if state != State.Dying:
+		weapon.shoot()
+		var damage := randi_range(damage_min,damage_max)
+		shot_fired.emit(gun_tip.global_position, gun_tip.global_rotation,damage)
 
 
 func get_random_spawn_position() -> Vector2:
@@ -72,3 +78,27 @@ func attract_coins(delta: float) -> void:
 			var coin: Coin = area
 			var coin_direction = coin.global_position.direction_to(global_position)
 			coin.position += coin_direction * magnet_strength * delta
+
+
+func check_for_overlapping_enemies(body: Node2D) -> void:
+	if body is Enemy and state == State.Moving:
+		current_health -= 1
+		if current_health <= 0:
+			state = State.Dying
+			print("im dead")
+		else:
+			state = State.Hurting
+			animation_player.play("hurt")
+
+func play_moving_animation(direction: Vector2) -> void:
+		if state == State.Moving:
+			if direction != Vector2.ZERO :
+				animation_player.play("walk")
+			else:
+				animation_player.play("idle")
+
+func finish_hurting() -> void:
+	state = State.Moving
+	animation_player.play("walk")
+	for body in hitbox_area.get_overlapping_bodies():
+		check_for_overlapping_enemies(body)
