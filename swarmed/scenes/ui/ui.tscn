@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c3sye7ekjtgvm"]
+
+[ext_resource type="Script" uid="uid://owt04fqju2nf" path="res://scenes/ui/ui.gd" id="1_0dwhk"]
+[ext_resource type="Texture2D" uid="uid://caxqxb26umr5n" path="res://assets/textures/ui/ui_clock.png" id="1_u7n8c"]
+[ext_resource type="FontFile" uid="uid://di8cfisxjfcj7" path="res://assets/fonts/my 3x5 tiny mono pixel font.ttf" id="2_f5cxw"]
+[ext_resource type="Texture2D" uid="uid://bk5jg2h75lt45" path="res://assets/textures/ui/ui_coin.png" id="3_aac20"]
+[ext_resource type="Texture2D" uid="uid://beni5rpkov8c5" path="res://assets/textures/ui/ui_heart.png" id="4_g5kmx"]
+
+[node name="UI" type="CanvasLayer" unique_id=1275024911]
+script = ExtResource("1_0dwhk")
+
+[node name="CLockImage" type="TextureRect" parent="." unique_id=82847701]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 9.0
+texture = ExtResource("1_u7n8c")
+
+[node name="TimeLeftLabel" type="Label" parent="." unique_id=1933767081]
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 32.0
+offset_bottom = 9.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 6
+text = "20:00"
+
+[node name="CoinImage" type="TextureRect" parent="." unique_id=1833162783]
+offset_left = 2.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 19.0
+texture = ExtResource("3_aac20")
+
+[node name="CoinLabel" type="Label" parent="." unique_id=1500260293]
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 32.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(1, 1, 0.050980393, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 6
+text = "5000"
+
+[node name="HealthImage" type="TextureRect" parent="." unique_id=435126593]
+offset_left = 2.0
+offset_top = 22.0
+offset_right = 9.0
+offset_bottom = 29.0
+texture = ExtResource("4_g5kmx")
+
+[node name="HealthLabels" type="Label" parent="." unique_id=1519601035]
+offset_left = 12.0
+offset_top = 23.0
+offset_right = 32.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(1, 0.09803922, 0.050980393, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 6
+text = "9/10"

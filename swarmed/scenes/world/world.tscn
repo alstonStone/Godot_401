@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dqhlkss18rwai" path="res://scenes/world/world.gd" id="1_1fp7r"]
 [ext_resource type="Texture2D" uid="uid://r8c1mr31dunb" path="res://assets/textures/backgrounds/map-background.png" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://c6wadhpdu25p3" path="res://scenes/player/player.tscn" id="2_sl2e5"]
+[ext_resource type="PackedScene" uid="uid://c3sye7ekjtgvm" path="res://scenes/ui/ui.tscn" id="4_6m72w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_neqkb"]
 size = Vector2(20, 270)
@@ -62,6 +63,8 @@ shape = SubResource("RectangleShape2D_7pehq")
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1274309921]
 wait_time = 3.0
 autostart = true
+
+[node name="UI" parent="." unique_id=1275024911 instance=ExtResource("4_6m72w")]
 
 [connection signal="shot_fired" from="Player" to="." method="_on_player_shot_fired"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_enemies"]
