@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://u5oxjbpqo8mq"]
+
+[ext_resource type="FontFile" uid="uid://di8cfisxjfcj7" path="res://assets/fonts/my 3x5 tiny mono pixel font.ttf" id="1_qkmkd"]
+[ext_resource type="Texture2D" uid="uid://13ad6ybr7h4d" path="res://assets/textures/ui/button-normal.png" id="2_ntbnw"]
+[ext_resource type="Texture2D" uid="uid://dkohhjthdufqe" path="res://assets/textures/ui/button-pressed.png" id="3_vxbux"]
+[ext_resource type="Texture2D" uid="uid://bprr7tgh8a481" path="res://assets/textures/ui/button-active.png" id="4_qhxag"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahnmp"]
+texture = ExtResource("2_ntbnw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xq4m"]
+content_margin_top = 5.0
+texture = ExtResource("3_vxbux")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ntbnw"]
+texture = ExtResource("4_qhxag")
+
+[node name="GameButton" type="Button" unique_id=1501638695]
+offset_right = 58.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("1_qkmkd")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxTexture_ahnmp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8xq4m")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ntbnw")
+text = "RESTART"

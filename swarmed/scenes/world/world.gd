@@ -56,3 +56,7 @@ func spawn_coin(global_position: Vector2, coin_type: Coin.CoinType) -> void:
 	new_coin.global_position = global_position
 	#add_child.call_deferred(new_coin)      Another way of doing call deffered
 	call_deferred("add_child", new_coin)
+
+
+func _on_ui_restart_game() -> void:
+	get_tree().reload_current_scene()

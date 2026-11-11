@@ -64,7 +64,9 @@ shape = SubResource("RectangleShape2D_7pehq")
 wait_time = 3.0
 autostart = true
 
-[node name="UI" parent="." unique_id=1275024911 instance=ExtResource("4_6m72w")]
+[node name="UI" parent="." unique_id=1275024911 node_paths=PackedStringArray("player") instance=ExtResource("4_6m72w")]
+player = NodePath("../Player")
 
 [connection signal="shot_fired" from="Player" to="." method="_on_player_shot_fired"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_enemies"]
+[connection signal="restart_game" from="UI" to="." method="_on_ui_restart_game"]

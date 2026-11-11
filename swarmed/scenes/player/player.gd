@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 signal shot_fired(global_position: Vector2, global_rotation: float, damage: int)
+signal dead
 
 enum State {Moving, Hurting, Dying}
 var state := State.Moving
@@ -85,7 +86,7 @@ func check_for_overlapping_enemies(body: Node2D) -> void:
 		current_health -= 1
 		if current_health <= 0:
 			state = State.Dying
-			print("im dead")
+			dead.emit()
 		else:
 			state = State.Hurting
 			animation_player.play("hurt")

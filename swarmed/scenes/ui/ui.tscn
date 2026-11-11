@@ -5,8 +5,127 @@
 [ext_resource type="FontFile" uid="uid://di8cfisxjfcj7" path="res://assets/fonts/my 3x5 tiny mono pixel font.ttf" id="2_f5cxw"]
 [ext_resource type="Texture2D" uid="uid://bk5jg2h75lt45" path="res://assets/textures/ui/ui_coin.png" id="3_aac20"]
 [ext_resource type="Texture2D" uid="uid://beni5rpkov8c5" path="res://assets/textures/ui/ui_heart.png" id="4_g5kmx"]
+[ext_resource type="Texture2D" uid="uid://cx85fxnf26sok" path="res://assets/textures/ui/restart-panel.png" id="6_pfayw"]
+[ext_resource type="Texture2D" uid="uid://dqrk7hagymlrq" path="res://assets/textures/backgrounds/game-over.png" id="7_7vp6q"]
+[ext_resource type="PackedScene" uid="uid://u5oxjbpqo8mq" path="res://scenes/ui/game_button.tscn" id="8_jcn1r"]
+[ext_resource type="Texture2D" uid="uid://c2rrjef0jh6fg" path="res://assets/textures/backgrounds/game-won.png" id="9_uegxj"]
+
+[sub_resource type="Animation" id="Animation_uegxj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOverPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(72, 250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOverPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameWonPanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(72, 250)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameWonPanel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jcn1r"]
+resource_name = "gameover"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOverPanel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(72, 250), Vector2(72, 54.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOverPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_y220t"]
+resource_name = "youwin"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameWonPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameWonPanel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(72, 250), Vector2(72, 54.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uegxj"]
+_data = {
+&"RESET": SubResource("Animation_uegxj"),
+&"gameover": SubResource("Animation_jcn1r"),
+&"youwin": SubResource("Animation_y220t")
+}
 
 [node name="UI" type="CanvasLayer" unique_id=1275024911]
+process_mode = 3
 script = ExtResource("1_0dwhk")
 
 [node name="CLockImage" type="TextureRect" parent="." unique_id=82847701]
@@ -61,3 +180,125 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_f5cxw")
 theme_override_font_sizes/font_size = 6
 text = "9/10"
+
+[node name="GameOverPanel" type="TextureRect" parent="." unique_id=481578848]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 130.0
+offset_right = 88.0
+offset_bottom = 261.00046
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_pfayw")
+
+[node name="GameOverTextureRect" type="TextureRect" parent="GameOverPanel" unique_id=1233440174]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.5
+offset_right = 169.0
+offset_bottom = 103.5
+texture = ExtResource("7_7vp6q")
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel" unique_id=948957722]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 13.5
+offset_right = 168.0
+offset_bottom = 36.5
+theme_override_colors/font_color = Color(1, 0.2, 1, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 12
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="GameOverTimeLabel" type="Label" parent="GameOverPanel" unique_id=898205675]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 42.5
+offset_right = 162.0
+offset_bottom = 65.5
+theme_override_colors/font_color = Color(1, 0.2, 0.28235295, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 12
+text = "TIME LEFT:  02:15"
+horizontal_alignment = 1
+
+[node name="GameOverButton" parent="GameOverPanel" unique_id=1501638695 instance=ExtResource("8_jcn1r")]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 106.5
+offset_right = 117.0
+offset_bottom = 126.5
+
+[node name="GameWonPanel" type="TextureRect" parent="." unique_id=1513708491]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 130.0
+offset_right = 88.0
+offset_bottom = 261.0005
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_pfayw")
+
+[node name="GameWonTextureRect" type="TextureRect" parent="GameWonPanel" unique_id=895226606]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.5
+offset_right = 169.0
+offset_bottom = 103.5
+texture = ExtResource("9_uegxj")
+
+[node name="GameWonLabel" type="Label" parent="GameWonPanel" unique_id=1635086293]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 27.5
+offset_right = 176.0
+offset_bottom = 50.5
+theme_override_colors/font_color = Color(0.23529412, 1, 0.2509804, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 22
+text = "YOU WIN "
+horizontal_alignment = 1
+
+[node name="GameWonButton" parent="GameWonPanel" unique_id=1968867481 instance=ExtResource("8_jcn1r")]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 106.5
+offset_right = 117.0
+offset_bottom = 126.5
+
+[node name="GameWonScoreLabel" type="Label" parent="GameWonPanel" unique_id=1734313877]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 66.0
+offset_right = 162.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0.8666667, 1, 0, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_f5cxw")
+theme_override_font_sizes/font_size = 12
+text = "SCORE:  0"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=628669331]
+libraries/ = SubResource("AnimationLibrary_uegxj")
+
+[connection signal="pressed" from="GameOverPanel/GameOverButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameWonPanel/GameWonButton" to="." method="_on_restart_button_pressed"]
